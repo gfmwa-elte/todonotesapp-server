@@ -1,0 +1,1 @@
+A 2013-2014. tanév őszi félévében, az ELTE IK-n tartott Gazdag Funkciójú Mobil és Webalkalmazások c. tárgy szerveroldala
