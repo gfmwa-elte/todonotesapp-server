@@ -5,7 +5,7 @@ import scalate.ScalateSupport
 import hu.gfmwa.todoapp.data._
 import hu.gfmwa.todoapp.models._
 import org.squeryl.PrimitiveTypeMode._
-import java.util.Random
+import scala.util.Random
 import java.util.Collections
 
 class TodoScalatraServlet extends GfmwaTodoAppStack {
@@ -49,12 +49,12 @@ class TodoScalatraServlet extends GfmwaTodoAppStack {
   }
   
   post("/login") {
-  	contentType = "text/html"
+  	contentType = formats("json")
   	val loginInfo = parsedBody.extract[LoginInfo]
   	if(from(UserDb.users)(user => where(user.username === loginInfo.username and user.password === loginInfo.password) select(user)).size == 1) {
-  		"true"
+		"{\"error\" : false}"
   	} else {
-  		"false"
+		"{\"error\" : true}"
   	}
   }
   
