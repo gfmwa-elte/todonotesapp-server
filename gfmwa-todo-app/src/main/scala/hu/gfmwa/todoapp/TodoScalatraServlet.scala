@@ -51,8 +51,9 @@ class TodoScalatraServlet extends GfmwaTodoAppStack {
   post("/login") {
   	contentType = formats("json")
   	val loginInfo = parsedBody.extract[LoginInfo]
-  	if(from(UserDb.users)(user => where(user.username === loginInfo.username and user.password === loginInfo.password) select(user)).size == 1) {
-		"{\"error\" : false}"
+  	val result = from(UserDb.users)(user => where(user.username === loginInfo.username and user.password === loginInfo.password) select(user))
+  	if(result.size == 1) {
+ 		"{\"error\" : false, \"userInfo\" : {\"userId\" : " + result.head.id + "}}"
   	} else {
 		"{\"error\" : true}"
   	}
